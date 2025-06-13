@@ -32,7 +32,7 @@ Las credenciales de AWS obtenidas deben configurarse como "Secrets" en cada uno 
 La infraestructura (VPC, EKS, ECR, etc.) se gestiona mediante Terraform.
 
 1.  **Repositorio:** `infrastructure`
-2.  **Pipeline:** Ejecuta la pipeline `deploy-infra.yaml` (o el nombre correspondiente de tu pipeline de Terraform).
+2.  **Pipeline:** Ejecuta la pipeline `deploy-infra.yaml`.
     *   Esta pipeline aplicará la configuración de Terraform para crear o actualizar la infraestructura necesaria en AWS.
     *   Espera a que la pipeline finalice exitosamente. Esto asegura que tu clúster de Kubernetes (EKS), el registro de contenedores (ECR) y otros recursos estén listos.
 
