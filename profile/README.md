@@ -42,9 +42,9 @@ Una vez la infraestructura esté lista, debes construir y subir las imágenes Do
 
 1.  **Despliegue de Microservicios Backend:**
     *   **Repositorio:** `ecommerce-microservice-backend-app`
-    *   **Pipeline:** Ejecuta la pipeline de despliegue principal (e.g., `deploy-and-trigger.yml`).
+    *   **Pipeline:** Ejecuta la pipeline de despliegue principal (`deploy-and-trigger.yml`).
     *   **Ramas y Namespaces:**
-        *   **Para un despliegue completo inicial en todos los entornos/namespaces (dev, staging, master/prod):** Ejecuta la pipeline manualmente para cada rama de entorno que tengas configurada (ej. `dev`, `staging`, `master`). Cada ejecución construirá las imágenes y las etiquetará apropiadamente, y luego activará la actualización del chart de Helm para el entorno correspondiente.
+        *   **Para un despliegue completo inicial en todos los entornos/namespaces (dev, stage, master):** Ejecuta la pipeline manualmente para cada rama de entorno que tengas configurada (ej. `dev`, `stage`, `master`). Cada ejecución construirá las imágenes y las etiquetará apropiadamente, y luego activará la actualización del chart de Helm para el entorno correspondiente.
         *   **Para un despliegue solo en `master` (producción):** Ejecuta la pipeline seleccionando la rama `master`.
 
 2.  **Despliegue de la Aplicación Frontend:**
@@ -52,7 +52,7 @@ Una vez la infraestructura esté lista, debes construir y subir las imágenes Do
     *   **Pipeline:** Ejecuta la pipeline de despliegue principal de este repositorio.
     *   **Ramas y Namespaces:** Sigue la misma lógica que para el backend. Ejecuta la pipeline para cada rama de entorno deseada.
 
-**Nota sobre el Despliegue Inicial:** El proceso de "ejecutar 3 veces" es una estrategia para poblar inicialmente diferentes namespaces o entornos si tu flujo de trabajo está configurado para manejar ramas (`dev`, `staging`, `master`) que mapean a diferentes configuraciones o namespaces en Kubernetes. Si solo usas un entorno principal (ej. `master`), una sola ejecución en esa rama es suficiente.
+**Nota sobre el Despliegue Inicial:** El proceso de "ejecutar 3 veces" es una estrategia para poblar inicialmente diferentes namespaces o entornos si tu flujo de trabajo está configurado para manejar ramas (`dev`, `stage`, `master`) que mapean a diferentes configuraciones o namespaces en Kubernetes. Si solo usas un entorno principal (ej. `master`), una sola ejecución en esa rama es suficiente.
 
 Una vez que las imágenes estén en ECR y los charts de Helm se hayan actualizado a través de sus pipelines, ArgoCD (que debe estar configurado en tu clúster EKS y apuntando al repositorio `ecommerce-chart`) detectará los cambios en el repositorio de charts y desplegará/actualizará automáticamente las aplicaciones en Kubernetes.
 
@@ -82,8 +82,8 @@ Una vez que la aplicación está en funcionamiento, el siguiente flujo se aplica
     *   **ArgoCD**, que está monitoreando el repositorio `ecommerce-chart`, detectará estos cambios.
     *   ArgoCD aplicará automáticamente los cambios en el clúster de Kubernetes, actualizando los deployments para usar las nuevas imágenes.
 
-5.  **Promoción a Otros Entornos (Staging, Producción):**
-    *   El proceso para promover cambios de `dev` a `staging`, y luego de `staging` a `master` (producción), típicamente involucra la creación de Pull Requests entre estas ramas.
-    *   Cada merge a una rama de entorno superior (`staging`, `master`) activará su respectiva pipeline de despliegue, que a su vez actualizará el chart y será desplegado por ArgoCD en el entorno correspondiente.
+5.  **Promoción a Otros Entornos (Stage, Producción):**
+    *   El proceso para promover cambios de `dev` a `stage`, y luego de `stage` a `master` (producción), típicamente involucra la creación de Pull Requests entre estas ramas.
+    *   Cada merge a una rama de entorno superior (`stage`, `master`) activará su respectiva pipeline de despliegue, que a su vez actualizará el chart y será desplegado por ArgoCD en el entorno correspondiente.
 
 Este flujo automatizado asegura que los cambios se integren, prueben y desplieguen de manera consistente y eficiente en la nube.
