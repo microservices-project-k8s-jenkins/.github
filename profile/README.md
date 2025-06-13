@@ -25,7 +25,7 @@ Las credenciales de AWS obtenidas deben configurarse como "Secrets" en cada uno 
     *   `AWS_ACCESS_KEY_ID`
     *   `AWS_SECRET_ACCESS_KEY`
     *   `AWS_SESSION_TOKEN`
-    *   Adicionalmente, otros secrets como `TF_REGION`, `TF_ECR_NAME`, y `CHARTS_REPO_TOKEN` (un Personal Access Token de GitHub para la comunicación entre pipelines) serán necesarios y deben configurarse según las necesidades de las pipelines. Consulta la configuración de cada pipeline para la lista completa de secrets requeridos.
+    *   Adicionalmente, otros secrets como `TF_REGION`, `TF_ECR_NAME`, y `CHARTS_REPO_TOKEN` (un Personal Access Token de GitHub para la comunicación entre pipelines) ya vienen por defecto pero segun se requiera serán necesarios y deben configurarse según las necesidades de las pipelines. Consulta la configuración de cada pipeline para la lista completa de secrets requeridos.
 
 ### Paso 1: Despliegue de la Infraestructura Base en AWS
 
