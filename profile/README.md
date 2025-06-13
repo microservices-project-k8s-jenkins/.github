@@ -1,3 +1,47 @@
+# Despliegue de Arquitectura Escalable en Kubernetes con enfoque GitOps en AWS con GitHub Actions y ArgoCD
+
+## Integrantes
+
+- Luisa Castaño
+- Juan Yustes
+- Santiago Barraza
+
+## Resumen del Proyecto
+
+Este proyecto implementa una solución de e-commerce basada en arquitectura de microservicios desplegada sobre un clúster de Kubernetes en AWS, aplicando prácticas avanzadas de DevOps y GitOps para garantizar automatización, escalabilidad, seguridad y observabilidad de extremo a extremo.
+
+### Componentes clave del sistema
+
+- Microservicios desarrollados en Spring Boot, organizados en repositorios independientes, empaquetados como contenedores Docker y versionados en AWS ECR.
+- Frontend en Angular, igualmente contenedorizado y desplegado en el clúster.
+- Infraestructura como Código (IaC) implementada con Terraform, utilizando S3 para el estado remoto y DynamoDB para bloqueo de concurrencia.
+- Orquestación mediante Kubernetes (EKS) con namespaces separados por entorno (dev, stage, master) alineados a ramas GitFlow.
+
+### Automatización CI/CD y GitOps
+
+- GitHub Actions ejecuta pipelines para compilar, testear, construir imágenes Docker, escanear vulnerabilidades (Trivy) y subirlas a ECR.
+- Actualización automática de referencias de imágenes en Helm Charts.
+- ArgoCD observa los repositorios de configuración y sincroniza el clúster con el estado deseado definido en Git, eliminando pasos manuales de despliegue.
+
+### Observabilidad y seguridad
+
+- Prometheus y Grafana para monitoreo de métricas.
+- Elastic Stack (ELK) para gestión centralizada de logs.
+- Zipkin para trazabilidad distribuida.
+- NetworkPolicies con Calico y RBAC siguiendo el principio de menor privilegio para segmentación y control de tráfico entre servicios.
+- Certificados TLS automatizados mediante Cert-Manager y Let's Encrypt, asegurando HTTPS para endpoints públicos.
+
+### Buenas prácticas DevOps implementadas
+
+- Estrategia robusta de pruebas: unitarias, de integración y end-to-end para cada microservicio.
+- Patrón External Configuration Store con ConfigMaps centralizados para la configuración.
+- Implementación de rotación automática de secretos con CronJobs.
+- Uso de Persistent Volumes para garantizar persistencia de datos en bases de datos y componentes de monitoreo.
+
+## Valor agregado
+
+Este proyecto demuestra de forma práctica la integración de tecnologías y prácticas modernas para diseñar, desplegar y operar una plataforma distribuida, escalable y segura en la nube, siguiendo estándares de la industria en Kubernetes, AWS, GitOps y CI/CD.
+
 ## Despliegue y Operación de la Aplicación de Microservicios
 
 Esta guía detalla los pasos necesarios para desplegar y operar la aplicación de microservicios en un entorno AWS, utilizando GitHub Actions para la automatización CI/CD y ArgoCD para el despliegue continuo.
